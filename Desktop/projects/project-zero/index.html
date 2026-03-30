@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutinas de Pensamiento · Project Zero</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0e17;
+      --surface: #1a1927;
+      --card: #22203a;
+      --border: #2e2b4a;
+      --inicio: #f4a261;
+      --inicio-glow: rgba(244, 162, 97, 0.15);
+      --desarrollo: #52b788;
+      --desarrollo-glow: rgba(82, 183, 136, 0.15);
+      --cierre: #c77dff;
+      --cierre-glow: rgba(199, 125, 255, 0.15);
+      --text: #e8e6f0;
+      --muted: #8b89a8;
+      --white: #ffffff;
+      --accent: #7b2d8b;
+    }
+
+    •⁠ ⁠ {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(–bg);
+      color: var(–text);
+      font-family: ‘DM Sans’, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE */
+    body::before {
+      content: ‘’;
+      position: fixed;
+      inset: 0;
+      background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘noise’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23noise)’ opacity=‘0.04’/%3E%3C/svg%3E”);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      z-index: 10;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+      border-bottom: 1px solid var(–border);
+      background: linear-gradient(180deg, rgba(123, 45, 139, 0.12) 0%, transparent 100%);
+    }
+
+    .harvard-badge {
+      display: inline-block;
+      font-family: ‘DM Sans’, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(–muted);
+      border: 1px solid var(–border);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: ‘Playfair Display’, serif;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(–inicio) 0%, var(–cierre) 60%, var(–desarrollo) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: var(–muted);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* STATS BAR */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(–muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stat-inicio .stat-num {
+      color: var(–inicio);
+    }
+
+    .stat-desarrollo .stat-num {
+      color: var(–desarrollo);
+    }
+
+    .stat-cierre .stat-num {
+      color: var(–cierre);
+    }
+
+    /* FILTERS */
+    .filters {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.75rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: ‘DM Sans’, sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      border: 1.5px solid var(–border);
+      background: transparent;
+      color: var(–muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .filter-btn:hover {
+      color: var(–text);
+      border-color: #4a4770;
+    }
+
+    .filter-btn.active-all {
+      border-color: var(–text);
+      color: var(–text);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn.active-inicio {
+      border-color: var(–inicio);
+      color: var(–inicio);
+      background: var(–inicio-glow);
+    }
+
+    .filter-btn.active-desarrollo {
+      border-color: var(–desarrollo);
+      color: var(–desarrollo);
+      background: var(–desarrollo-glow);
+    }
+
+    .filter-btn.active-cierre {
+      border-color: var(–cierre);
+      color: var(–cierre);
+      background: var(–cierre-glow);
+    }
+
+    /* SEARCH */
+    .search-wrap {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      padding: 0 1rem 1.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 500px;
+      background: var(–surface);
+      border: 1.5px solid var(–border);
+      border-radius: 12px;
+      color: var(–text);
+      font-family: ‘DM Sans’, sans-serif;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem 0.75rem 3rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input::placeholder {
+      color: var(–muted);
+    }
+
+    .search-input:focus {
+      border-color: #4a4770;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: calc(50% - 235px);
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(–muted);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* GRID */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* SECTION DIVIDERS - rendered as grid-spanning elements */
+    .section-header {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(–border);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .section-inicio .section-label {
+      color: var(–inicio);
+      border-color: var(–inicio);
+      background: var(–inicio-glow);
+    }
+
+    .section-desarrollo .section-label {
+      color: var(–desarrollo);
+      border-color: var(–desarrollo);
+      background: var(–desarrollo-glow);
+    }
+
+    .section-cierre .section-label {
+      color: var(–cierre);
+      border-color: var(–cierre);
+      background: var(–cierre-glow);
+    }
+
+    /* CARD */
+    .card {
+      background: var(–card);
+      border: 1px solid var(–border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: ‘’;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .card.inicio::before {
+      background: linear-gradient(90deg, var(–inicio), transparent);
+    }
+
+    .card.desarrollo::before {
+      background: linear-gradient(90deg, var(–desarrollo), transparent);
+    }
+
+    .card.cierre::before {
+      background: linear-gradient(90deg, var(–cierre), transparent);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card.inicio:hover {
+      border-color: var(–inicio);
+      box-shadow: 0 12px 40px var(–inicio-glow);
+    }
+
+    .card.desarrollo:hover {
+      border-color: var(–desarrollo);
+      box-shadow: 0 12px 40px var(–desarrollo-glow);
+    }
+
+    .card.cierre:hover {
+      border-color: var(–cierre);
+      box-shadow: 0 12px 40px var(–cierre-glow);
+    }
+
+    .card-num {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(–muted);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .card-name {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+      color: var(–white);
+    }
+
+    .card-goal {
+      font-size: 0.85rem;
+      color: var(–muted);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .tag-inicio {
+      color: var(–inicio);
+      background: var(–inicio-glow);
+    }
+
+    .tag-desarrollo {
+      color: var(–desarrollo);
+      background: var(–desarrollo-glow);
+    }
+
+    .tag-cierre {
+      color: var(–cierre);
+      background: var(–cierre-glow);
+    }
+
+    /* STEPS PREVIEW */
+    .steps-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #c5c3d8;
+    }
+
+    .step-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .dot-inicio {
+      background: var(–inicio-glow);
+      color: var(–inicio);
+    }
+
+    .dot-desarrollo {
+      background: var(–desarrollo-glow);
+      color: var(–desarrollo);
+    }
+
+    .dot-cierre {
+      background: var(–cierre-glow);
+      color: var(–cierre);
+    }
+
+    /* EXPAND BUTTON */
+    .expand-btn {
+      margin-top: 1.25rem;
+      width: 100%;
+      background: none;
+      border: 1px solid var(–border);
+      color: var(–muted);
+      border-radius: 10px;
+      padding: 0.6rem;
+      font-size: 0.78rem;
+      font-family: ‘DM Sans’, sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .expand-btn:hover {
+      border-color: #4a4770;
+      color: var(–text);
+    }
+
+    .card.inicio .expand-btn:hover {
+      border-color: var(–inicio);
+      color: var(–inicio);
+    }
+
+    .card.desarrollo .expand-btn:hover {
+      border-color: var(–desarrollo);
+      color: var(–desarrollo);
+    }
+
+    .card.cierre .expand-btn:hover {
+      border-color: var(–cierre);
+      color: var(–cierre);
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 14, 23, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal {
+      background: var(–surface);
+      border: 1px solid var(–border);
+      border-radius: 24px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: slideUp 0.25s ease;
+      padding: 2.25rem;
+    }
+
+    .modal::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+      background: var(–border);
+      border-radius: 3px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: var(–card);
+      border: 1px solid var(–border);
+      color: var(–muted);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(–text);
+      border-color: #4a4770;
+    }
+
+    .modal-tag {
+      margin-bottom: 1rem;
+    }
+
+    .modal-name {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: var(–white);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .modal-goal {
+      font-size: 0.92rem;
+      color: var(–muted);
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid var(–border);
+    }
+
+    .modal-section-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(–muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .modal-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .modal-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background: var(–card);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(–text);
+    }
+
+    .modal-step-num {
+      font-family: ‘Playfair Display’, serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .modal-step.inicio .modal-step-num {
+      color: var(–inicio);
+    }
+
+    .modal-step.desarrollo .modal-step-num {
+      color: var(–desarrollo);
+    }
+
+    .modal-step.cierre .modal-step-num {
+      color: var(–cierre);
+    }
+
+    .modal-ideal {
+      background: var(–card);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      font-size: 0.87rem;
+      color: #c5c3d8;
+      line-height: 1.6;
+      margin-top: 0.5rem;
+    }
+
+    /* NO RESULTS */
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(–muted);
+    }
+
+    .no-results .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .no-results p {
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      color: var(–muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(–border);
+      margin-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 3rem;
+      }
+
+      .search-icon {
+        left: 2rem;
+      }
+
+      .modal {
+        padding: 1.75rem 1.25rem;
+      }
+
+      .modal-name {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="harvard-badge">Project Zero · Harvard Graduate School of Education</div>
+    <h1>Rutinas de <span>Pensamiento</span></h1>
+    <p class="subtitle">20 rutinas organizadas por momento pedagógico para transformar el aula en un espacio de
+      pensamiento visible.</p>
+    <div class="stats">
+      <div class="stat stat-inicio">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Inicio de tema</div>
+      </div>
+      <div class="stat stat-desarrollo">
+        <div class="stat-num">8</div>
+        <div class="stat-label">Desarrollo</div>
+      </div>
+      <div class="stat stat-cierre">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Cierre</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active-all" onclick="setFilter('all', this)">Todas las rutinas</button>
+    <button class="filter-btn" onclick="setFilter('inicio', this)">🌱 Inicio de tema</button>
+    <button class="filter-btn" onclick="setFilter('desarrollo', this)">🌿 Desarrollo</button>
+    <button class="filter-btn" onclick="setFilter('cierre', this)">✨ Cierre</button>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="Buscar rutina por nombre o propósito..."
+      oninput="searchRoutines(this.value)" id="searchInput">
+  </div>
+
+  <main id="cardsGrid"></main>
+
+  <!-- MODAL -->
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modalContent">
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <footer>
+    Basado en las rutinas del Proyecto Zero · Harvard Graduate School of Education · Para uso pedagógico interno
+  </footer>
+
+  <script>
+    const routines = [
+      // ====== INICIO DE TEMA ======
+      {
+        id: 1,
+        tipo: "inicio",
+        nombre: "Veo, Pienso, Me pregunto",
+        objetivo: "Estimular la observación cuidadosa, la curiosidad y la conexión con conocimientos previos ante un estímulo visual o concreto.",
+        pasos: ["¿Qué ves? (solo lo observable, sin interpretar)", "¿Qué piensas sobre lo que ves? (interpretaciones y conexiones)", "¿Qué te preguntas? (preguntas genuinas que surgen)"],
+        ideal: "Analizar imágenes, objetos, videos o situaciones nuevas al inicio de cualquier tema o unidad."
+      },
+      {
+        id: 2,
+        tipo: "inicio",
+        nombre: "Pensar, Inquietar, Explorar",
+        objetivo: "Activar conocimientos previos, identificar dudas genuinas y planificar cómo investigar un tema.",
+        pasos: ["¿Qué crees que sabes sobre el tema?", "¿Qué preguntas o ideas te inquietan?", "¿Cómo podrías explorarlo o investigarlo?"],
+        ideal: "Inicio de proyectos de investigación, unidades nuevas o debates sobre temas complejos."
+      },
+      {
+        id: 3,
+        tipo: "inicio",
+        nombre: "Puente: 3-2-1",
+        objetivo: "Conectar ideas previas con nuevos aprendizajes y hacer visible cómo evoluciona la comprensión.",
+        pasos: ["Antes de aprender: anota 3 ideas, 2 preguntas y 1 analogía sobre el tema", "Aprende o explora el contenido nuevo", "Después: repite las 3 preguntas y compara qué cambió en tu pensamiento"],
+        ideal: "Introducir información nueva sobre un tema que los estudiantes ya conocen parcialmente."
+      },
+      {
+        id: 4,
+        tipo: "inicio",
+        nombre: "El Juego de la Explicación",
+        objetivo: "Explorar la causalidad, entender cómo funcionan las partes de un todo y construir explicaciones propias.",
+        pasos: ["Nombra una parte o aspecto del objeto, fenómeno o sistema", "¿Qué crees que es o para qué sirve?", "¿Por qué crees que es así? ¿Qué evidencia te lleva a pensarlo?"],
+        ideal: "Comprensión de sistemas complejos, diagramas, fenómenos científicos o estructuras sociales."
+      },
+      {
+        id: 5,
+        tipo: "inicio",
+        nombre: "Zoom In",
+        objetivo: "Desarrollar la observación detallada y cultivar la paciencia intelectual ante la incertidumbre.",
+        pasos: ["Revela solo una pequeña parte de una imagen o texto y pide observaciones", "Amplía gradualmente y solicita nuevas interpretaciones", "Revela el todo completo: ¿qué cambió en tu comprensión?"],
+        ideal: "Activar la curiosidad al inicio de un tema; funciona muy bien con obras de arte, fotografías históricas o datos."
+      },
+      {
+        id: 6,
+        tipo: "inicio",
+        nombre: "Titular",
+        objetivo: "Capturar la esencia de una idea o experiencia en una frase memorable que revele la perspectiva del estudiante.",
+        pasos: ["Si esta situación, texto o tema fuera noticia, ¿cuál sería el titular?", "¿Qué captura lo más importante o interesante?", "Comparte y compara titulares: ¿qué revelan sobre diferentes perspectivas?"],
+        ideal: "Inicio de debate, análisis de textos o eventos actuales. Útil para revelar suposiciones rápidamente."
+      },
+      {
+        id: 7,
+        tipo: "inicio",
+        nombre: "Círculo de Puntos de Vista",
+        objetivo: "Ampliar la comprensión de un tema considerando múltiples perspectivas desde el inicio.",
+        pasos: ["Identifica todas las personas, grupos u objetos involucrados en el tema", "Elige uno y adopta su punto de vista: '¿Qué pienso yo desde aquí?'", "Comparte en círculo y registra la diversidad de perspectivas halladas"],
+        ideal: "Historia, literatura, ética, resolución de conflictos. Excelente para temas con múltiples actores."
+      },
+
+      // ====== DESARROLLO ======
+      {
+        id: 8,
+        tipo: "desarrollo",
+        nombre: "Puntos de Vista",
+        objetivo: "Fomentar la empatía profunda y entender cómo distintas posiciones generan distintas interpretaciones.",
+        pasos: ["Identifica un personaje, actor o elemento del tema estudiado", "¿Qué siente, piensa o percibe desde su lugar?", "¿Qué le preocupa? ¿Qué le gustaría que los demás supieran?"],
+        ideal: "Análisis literario, estudio de conflictos históricos o sociales, dilemas éticos en ciencias."
+      },
+      {
+        id: 9,
+        tipo: "desarrollo",
+        nombre: "Afirmar, Apoyar, Cuestionar",
+        objetivo: "Desarrollar el pensamiento basado en evidencias y la capacidad de argumentación rigurosa.",
+        pasos: ["Haz una afirmación sobre el tema estudiado", "Apóyala con datos, ejemplos o evidencias concretas", "Plantea una duda o cuestionamiento legítimo sobre tu propia afirmación"],
+        ideal: "Debates, análisis de noticias, textos argumentativos, ciencias experimentales."
+      },
+      {
+        id: 10,
+        tipo: "desarrollo",
+        nombre: "Partes, Propósitos, Complejidades",
+        objetivo: "Analizar la complejidad de sistemas, objetos o fenómenos descomponiéndolos en sus elementos.",
+        pasos: ["¿Cuáles son las partes que componen esto?", "¿Cuál es el propósito de cada parte?", "¿Qué complejidades o tensiones emergen entre las partes?"],
+        ideal: "Desmontaje de objetos técnicos, análisis de estructuras políticas, organizaciones o ecosistemas."
+      },
+      {
+        id: 11,
+        tipo: "desarrollo",
+        nombre: "Las 3 Y (3Ys)",
+        objetivo: "Conectar el aprendizaje con lo personal, lo comunitario y lo global para darle relevancia real.",
+        pasos: ["¿Por qué es importante esto para mí personalmente?", "¿Por qué importa a mi comunidad o escuela?", "¿Por qué le importa al mundo? ¿Qué consecuencias globales tiene?"],
+        ideal: "Temas de ética, ciudadanía, medio ambiente, ciencia aplicada y humanidades."
+      },
+      {
+        id: 12,
+        tipo: "desarrollo",
+        nombre: "Tug of War (Jalar la Cuerda)",
+        objetivo: "Explorar tensiones genuinas en dilemas éticos o situaciones complejas sin buscar una respuesta fácil.",
+        pasos: ["Identifica dos posiciones opuestas sobre un dilema (los extremos de la cuerda)", "Enumera las razones que 'jalan' hacia cada lado con igual fuerza", "Reflexiona: ¿qué hace este dilema tan difícil de resolver?"],
+        ideal: "Dilemas éticos, debates históricos, decisiones científicas con implicaciones sociales."
+      },
+      {
+        id: 13,
+        tipo: "desarrollo",
+        nombre: "Conectar, Extender, Cuestionar",
+        objetivo: "Profundizar en nuevo contenido relacionándolo activamente con lo que ya se sabe.",
+        pasos: ["¿Cómo se conecta esto con algo que ya sabías o experimentaste?", "¿Qué extiende, amplía o desafía tu pensamiento anterior?", "¿Qué preguntas nuevas, sorpresivas o confusas surgen?"],
+        ideal: "Lecturas académicas, conferencias, documentales. Útil para el trabajo con textos complejos."
+      },
+      {
+        id: 14,
+        tipo: "desarrollo",
+        nombre: "Color, Símbolo, Imagen",
+        objetivo: "Sintetizar la esencia de una idea de forma no verbal, usando el pensamiento metafórico y creativo.",
+        pasos: ["Elige un color que represente el núcleo de la idea estudiada (¿por qué ese color?)", "Elige un símbolo que capture algo esencial de la idea", "Crea o elige una imagen que sintetice todo lo aprendido"],
+        ideal: "Resumir lecturas, charlas, conceptos abstractos; ideal en ciencias sociales, artes y filosofía."
+      },
+      {
+        id: 15,
+        tipo: "desarrollo",
+        nombre: "Los Círculos de la Complejidad",
+        objetivo: "Mapear las múltiples capas que componen un fenómeno complejo: lo inmediato, lo sistémico y lo global.",
+        pasos: ["Centro: ¿cuál es el hecho o evento concreto?", "Segundo círculo: ¿qué causas, actores y contextos lo rodean?", "Círculo exterior: ¿qué fuerzas globales, históricas o culturales lo explican?"],
+        ideal: "Historia, estudios sociales, economía, ciencias ambientales. Ideal para fenómenos con múltiples causas."
+      },
+
+      // ====== CIERRE ======
+      {
+        id: 16,
+        tipo: "cierre",
+        nombre: "Antes pensaba... Ahora pienso...",
+        objetivo: "Reflexionar metacognitivamente sobre cómo ha cambiado el pensamiento a lo largo del aprendizaje.",
+        pasos: ["Antes pensaba que... (escribe lo que creías al inicio)", "Ahora pienso que... (escribe cómo cambió tu comprensión)", "¿Qué fue lo que más transformó tu manera de ver el tema?"],
+        ideal: "Evaluación de aprendizaje al final de una unidad, debate o experiencia significativa."
+      },
+      {
+        id: 17,
+        tipo: "cierre",
+        nombre: "Generar, Clasificar, Conectar, Elaborar",
+        objetivo: "Sintetizar lo aprendido organizando ideas en mapas conceptuales que revelen comprensión profunda.",
+        pasos: ["Genera palabras o conceptos clave del tema estudiado", "Clasifícalos: ¿qué es central? ¿qué es secundario?", "Conecta y elabora: traza relaciones y explica por qué van juntos"],
+        ideal: "Cierre de unidades complejas, preparación para evaluaciones, síntesis de proyectos."
+      },
+      {
+        id: 18,
+        tipo: "cierre",
+        nombre: "El Protocolo de la Oración Final",
+        objetivo: "Articular el aprendizaje más significativo en una sola frase poderosa y fundamentada.",
+        pasos: ["Reflexiona: ¿cuál es la idea más importante que te llevas de este tema?", "Escríbela en una sola oración clara y precisa", "Comparte y escucha las oraciones de los demás: ¿qué revelan en conjunto?"],
+        ideal: "Cierre de clases magistrales, lecturas, películas o experiencias de campo."
+      },
+      {
+        id: 19,
+        tipo: "cierre",
+        nombre: "Yo solía pensar... Ahora sé...",
+        objetivo: "Visibilizar el cambio conceptual y celebrar el crecimiento intelectual al cerrar un ciclo de aprendizaje.",
+        pasos: ["Yo solía pensar... (idea previa, creencia o supuesto inicial)", "Ahora sé (o comprendo) que... (nuevo entendimiento con matices)", "Lo que aún me pregunto es... (incertidumbre productiva que persiste)"],
+        ideal: "Cierre de proyectos largos, fin de semestre, evaluación de cambio conceptual profundo."
+      },
+      {
+        id: 20,
+        tipo: "cierre",
+        nombre: "Un Día en la Vida",
+        objetivo: "Consolidar el aprendizaje aplicándolo creativamente a una situación cotidiana y concreta.",
+        pasos: ["Imagina que debes explicar lo aprendido desde la perspectiva de alguien que lo vive", "Narra cómo ese concepto, hecho o idea aparece en el día a día de esa persona", "¿Qué revela este ejercicio sobre la relevancia y aplicación del aprendizaje?"],
+        ideal: "Cierre de temas de ciencias, historia o ética donde se busca aplicación práctica del conocimiento."
+      }
+    ];
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function setFilter(tipo, btn) {
+      currentFilter = tipo;
+      document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
+      btn.classList.add('active-' + tipo);
+      renderCards();
+    }
+
+    function searchRoutines(val) {
+      currentSearch = val.toLowerCase();
+      renderCards();
+    }
+
+    function renderCards() {
+      const grid = document.getElementById('cardsGrid');
+      grid.innerHTML = '';
+
+      const filtered = routines.filter(r => {
+        const matchTipo = currentFilter === 'all' || r.tipo === currentFilter;
+        const matchSearch = !currentSearch ||
+          r.nombre.toLowerCase().includes(currentSearch) ||
+          r.objetivo.toLowerCase().includes(currentSearch) ||
+          r.ideal.toLowerCase().includes(currentSearch);
+        return matchTipo && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = ⁠ <div class="no-results"><div class="icon">🔍</div><p>No se encontraron rutinas. Intenta con otro término.</p></div> ⁠;
+        return;
+      }
+
+      const grupos = ['inicio', 'desarrollo', 'cierre'];
+      const labels = { inicio: '🌱 Inicio de Tema', desarrollo: '🌿 Desarrollo del Tema', cierre: '✨ Cierre y Reflexión' };
+
+      grupos.forEach(tipo => {
+        const grupo = filtered.filter(r => r.tipo === tipo);
+        if (grupo.length === 0) return;
+
+        const secDiv = document.createElement('div');
+        secDiv.className = ⁠ section - header section - ${ tipo } ⁠;
+        secDiv.innerHTML = ⁠ <div class="section-line"></div><div class="section-label">${labels[tipo]}</div><div class="section-line"></div> ⁠;
+        grid.appendChild(secDiv);
+
+        grupo.forEach((r, idx) => {
+          const card = document.createElement('div');
+          card.className = ⁠ card ${ r.tipo } ⁠;
+          card.innerHTML = `
+        <div class="card-num">RUTINA ${r.id}</div>
+        <div class="card-tag tag-${r.tipo}">${labels[r.tipo].replace('🌱 ', '').replace('🌿 ', '').replace('✨ ', '')}</div>
+        <div class="card-name">${r.nombre}</div>
+        <div class="card-goal">${r.objetivo}</div>
+        <div class="steps-preview">
+          ${r.pasos.map((p, i) => `
+            <div class="step-item">
+              <div class="step-dot dot-${r.tipo}">${i + 1}</div>
+              <span>${p}</span>
+            </div>
+          `).join('')}
+        </div>
+        <button class="expand-btn" onclick="openModal(${r.id})">Ver detalle completo →</button>
+      `;
+          grid.appendChild(card);
+        });
+      });
+    }
+
+    function openModal(id) {
+      const r = routines.find(x => x.id === id);
+      const labels = { inicio: '🌱 Inicio de Tema', desarrollo: '🌿 Desarrollo del Tema', cierre: '✨ Cierre y Reflexión' };
+      document.getElementById('modalBody').innerHTML = `
+    <div class="modal-tag"><span class="card-tag tag-${r.tipo}">${labels[r.tipo]}</span></div>
+    <div class="modal-name">${r.nombre}</div>
+    <div class="modal-goal">${r.objetivo}</div>
+    <div class="modal-section-title">Pasos / Preguntas clave</div>
+    <div class="modal-steps">
+      ${r.pasos.map((p, i) => `
+        <div class="modal-step ${r.tipo}">
+          <div class="modal-step-num">${i + 1}.</div>
+          <span>${p}</span>
+        </div>
+      `).join('')}
+    </div>
+    <div class="modal-section-title">Ideal para...</div>
+    <div class="modal-ideal">📌 ${r.ideal}</div>
+  `;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModalBtn();
+    }
+    function closeModalBtn() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+    renderCards();
+  </script>
+
+</body>
+
+</html>
