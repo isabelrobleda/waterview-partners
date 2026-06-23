@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers — Waterview Partners</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --navy: #1B2D3F; --cream: #EDE8DF; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--navy); overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 4rem;
+      background: rgba(237,232,223,0.92); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(27,45,63,0.08);
+    }
+    .nav-brand {
+      text-decoration: none; font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.22em; color: var(--navy); text-transform: uppercase;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy);
+      opacity: 0.55; transition: opacity 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; }
+
+    .page-wrap { max-width: 760px; margin: 0 auto; padding: 10rem 2rem 7rem; }
+
+    .eyebrow {
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.28em;
+      text-transform: uppercase; opacity: 0.38; margin-bottom: 1.2rem;
+    }
+    .rule { width: 48px; height: 2px; background: var(--navy); margin-bottom: 2.8rem; opacity: 0.25; }
+
+    .careers-intro {
+      font-size: 2.4rem; font-weight: 300; color: var(--navy);
+      line-height: 1.25; margin-bottom: 2.5rem;
+    }
+    .lead {
+      font-size: 0.95rem; font-weight: 300; line-height: 1.95;
+      color: rgba(27,45,63,0.72); margin-bottom: 1.3rem;
+    }
+    .lead strong { font-weight: 700; color: var(--navy); }
+
+    .section-divider {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--navy);
+      margin-top: 3.5rem; margin-bottom: 1.6rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(27,45,63,0.12);
+    }
+
+    .why-box {
+      background: var(--navy); padding: 3.5rem 4rem;
+      margin-top: 4rem;
+    }
+    .why-title {
+      font-size: 1.2rem; font-weight: 700; color: var(--cream);
+      letter-spacing: 0.04em; margin-bottom: 2rem;
+    }
+    .why-box p {
+      font-size: 0.95rem; font-weight: 300; line-height: 1.95;
+      color: rgba(237,232,223,0.72); margin-bottom: 1.3rem;
+    }
+    .why-box p:last-child { margin-bottom: 0; }
+
+    .cta-row {
+      margin-top: 4rem; padding-top: 3rem;
+      border-top: 1px solid rgba(27,45,63,0.1);
+      display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    }
+    .cta-label {
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.2em;
+      text-transform: uppercase; opacity: 0.4;
+    }
+    .cta-email {
+      font-size: 0.95rem; font-weight: 500; color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(27,45,63,0.2); padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .cta-email:hover { border-color: var(--navy); }
+
+    footer {
+      background: var(--navy); padding: 1.8rem 4rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .f-brand { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(237,232,223,0.3); }
+    .f-copy { font-size: 0.62rem; color: rgba(237,232,223,0.2); letter-spacing: 0.06em; }
+
+    @media (max-width: 720px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-wrap { padding: 8rem 1.5rem 5rem; }
+      .why-box { padding: 2.5rem 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="index.html">Waterview Partners</a>
+    <ul class="nav-links">
+      <li><a href="index.html#mission">Mission</a></li>
+      <li><a href="index.html#about">Team</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="careers.html" class="active">Careers</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrap">
+    <p class="eyebrow">Careers</p>
+    <div class="rule"></div>
+
+    <h1 class="careers-intro">You Know Who You Are</h1>
+
+    <p class="lead">Exceptional people rarely need to be told they are exceptional.</p>
+    <p class="lead">They have spent years earning trust, developing expertise, and consistently delivering results in environments where expectations are high, standards are uncompromising, and sustained excellence is the baseline.</p>
+    <p class="lead">If that describes you, and you are ready to help build category-defining companies in industries that matter, we encourage you to reach out to the founders directly.</p>
+    <p class="lead">Waterview Partners builds companies in Space Technology, Semiconductors, Artificial Intelligence, Robotics, Advanced Manufacturing, Defense &amp; Autonomous Systems, Specialty Chemicals, and Advanced Materials.</p>
+    <p class="lead">These are not incremental industries.</p>
+    <p class="lead">They are the strategic industries North America allowed to migrate elsewhere. Industries it is only now beginning to rebuild, driven by supply chain resilience, cost competitiveness, and national security imperatives.</p>
+    <p class="lead">We are looking for two types of people.</p>
+
+    <div class="section-divider">(I) Industry Subject Matter Experts</div>
+
+    <p class="lead">Space Technology. Semiconductors. Artificial Intelligence. Robotics. Advanced Manufacturing. Defense &amp; Autonomous Systems. Specialty Chemicals. Advanced Materials.</p>
+    <p class="lead">You have 15 or more years of deep operating experience in one of these sectors. People in your industry take your calls.</p>
+    <p class="lead">You have built products, led organizations, run operations, commercialized technologies, developed markets, or closed transformative transactions. You have technical credibility, commercial judgment, and relationships that cannot be replicated.</p>
+    <p class="lead">You understand your industry inside and out. Not from advising it. From building within it. You have lived it. You carry the judgment, the scars, the credibility, and the network that only years inside an industry can create.</p>
+    <p class="lead">You bring technical depth and business development capability in equal measure. You know the customers, suppliers, partners, regulators, and decision-makers who shape your sector.</p>
+    <p class="lead"><strong>Critical:</strong> You are comfortable operating in high-performance environments alongside professionals from private equity, venture capital, investment banking, Big Law, and management consulting. You understand the responsiveness, urgency, accountability, and standards of excellence these environments demand. You are proactive, highly responsive, and execution-oriented. You anticipate issues before they arise, communicate clearly, and consistently move initiatives from discussion to completion.</p>
+    <p class="lead">You do not wait to be told what to do. You identify opportunities, solve problems, and drive outcomes.</p>
+    <p class="lead">Most importantly, you are ready to apply your expertise to building something of your own.</p>
+
+    <div class="section-divider">(II) Investment &amp; Transaction Professionals</div>
+
+    <p class="lead">You have spent 10 or more years at an elite institution. Private equity, venture capital, investment banking, Big Law, management consulting or a similarly rigorous environment.</p>
+    <p class="lead">You have already received the training. You do not need handholding.</p>
+    <p class="lead">You can walk into a complex situation, quickly identify what matters, exercise sound judgment, and execute with limited supervision. You are comfortable operating in ambiguity, managing multiple workstreams simultaneously, and solving problems that have no predefined answers.</p>
+    <p class="lead">You can review a two-page memorandum, surface the critical issues in minutes, and drive toward resolution. You are comfortable coordinating investment bankers, government officials, accountants, consultants, and legal counsel across jurisdictions, managing complex transactions and negotiating against world-class counterparties.</p>
+    <p class="lead">Your written communication and email etiquette is impeccable. Your judgment is sound. Your follow-through is total.</p>
+    <p class="lead">You are commercially minded, intellectually honest, highly responsive, and relentlessly accountable. You build trust with founders, executives, investors, government officials, lenders, and industry leaders. You know how to align stakeholders and get things done.</p>
+    <p class="lead">You bring energy to the team, not drama. You leave your ego at the door, focus on the objective, and execute at a consistently high level.</p>
+    <p class="lead">Experience in New York, Los Angeles, Silicon Valley, London, or similarly demanding markets is strongly preferred.</p>
+
+    <div class="why-box">
+      <p class="why-title">Why Waterview Partners</p>
+      <p>At some point, many exceptional people stop finding large institutions fulfilling.</p>
+      <p>The compensation is attractive. The title is prestigious. The platform is world-class. But you already know you can do more. You just need the right vehicle.</p>
+      <p>If you are looking for another corporate ladder to climb, we are not the right fit.</p>
+      <p>We are looking for proven professionals who can sit across the table from CEOs, investors, founders, government officials, lenders, and industry leaders and immediately add value.</p>
+      <p>People who can build.</p>
+      <p>We move quickly. We expect excellence. We value judgment, accountability, intellectual curiosity, resilience, and a founder's mentality.</p>
+      <p>This is not for everyone.</p>
+      <p>But if you have spent the last decade proving yourself inside the world's best institutions and you are ready to build category-defining companies from the ground up, we would like to hear from you.</p>
+    </div>
+
+    <div class="cta-row">
+      <span class="cta-label">Reach out directly</span>
+      <a class="cta-email" href="mailto:marcelo@waterviewpartners.co">marcelo@waterviewpartners.co</a>
+      <a class="cta-email" href="mailto:genaro@waterviewpartners.co">genaro@waterviewpartners.co</a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="f-brand">Waterview Partners</span>
+    <span class="f-copy">&copy; 2026 Waterview Partners. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
