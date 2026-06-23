@@ -9,11 +9,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --navy:       #1B2D3F;
-      --navy-mid:   #243a50;
-      --cream:      #EDE8DF;
-      --cream-dark: #e0d9ce;
-      --white:      #ffffff;
+      --navy:     #1B2D3F;
+      --cream:    #EDE8DF;
     }
 
     html { scroll-behavior: smooth; }
@@ -25,7 +22,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ─────────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -38,7 +35,6 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(27,45,63,0.08);
     }
-
     .nav-brand {
       font-size: 0.72rem;
       font-weight: 800;
@@ -46,13 +42,11 @@
       color: var(--navy);
       text-transform: uppercase;
     }
-
     .nav-links {
       list-style: none;
       display: flex;
       gap: 2.5rem;
     }
-
     .nav-links a {
       text-decoration: none;
       font-size: 0.68rem;
@@ -63,23 +57,11 @@
       opacity: 0.55;
       transition: opacity 0.2s;
     }
-
     .nav-links a:hover { opacity: 1; }
 
-    /* ── SECTION BASE ─────────────────────────────────── */
-    section {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .inner {
-      width: 100%;
-      max-width: 940px;
-      padding: 0 2rem;
-    }
-
+    /* ── SHARED ───────────────────────────────────── */
+    section { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .inner { width: 100%; max-width: 960px; padding: 0 2rem; }
     .eyebrow {
       font-size: 0.65rem;
       font-weight: 800;
@@ -88,38 +70,25 @@
       opacity: 0.38;
       margin-bottom: 1.2rem;
     }
-
     .eyebrow.light { color: var(--cream); opacity: 0.45; }
+    .rule { width: 48px; height: 2px; background: currentColor; margin-bottom: 2.2rem; opacity: 0.25; }
 
-    .rule {
-      width: 48px;
-      height: 2px;
-      background: currentColor;
-      margin-bottom: 2.2rem;
-      opacity: 0.25;
-    }
-
-    /* ── SECTION 1 — HERO ─────────────────────────────── */
+    /* ── SECTION 1 — HERO ─────────────────────────── */
     #hero {
       background: var(--cream);
       flex-direction: column;
       gap: 0;
       position: relative;
+      padding-top: 6rem;
     }
-
     .hero-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.2rem;
+      gap: 1.6rem;
       text-align: center;
     }
-
-    .logo-mark {
-      width: 108px;
-      height: auto;
-    }
-
+    .logo-mark { width: 108px; height: auto; }
     .hero-wordmark h1 {
       font-size: 3.4rem;
       font-weight: 900;
@@ -128,8 +97,7 @@
       color: var(--navy);
       line-height: 1;
     }
-
-    .hero-wordmark p {
+    .hero-wordmark p.subtitle {
       font-size: 0.9rem;
       font-weight: 500;
       letter-spacing: 0.42em;
@@ -138,7 +106,22 @@
       opacity: 0.55;
       margin-top: 0.55rem;
     }
-
+    .hero-slogan {
+      font-size: 0.95rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      opacity: 0.6;
+      margin-top: 0.4rem;
+    }
+    .hero-mina {
+      margin-top: 1.8rem;
+    }
+    .hero-mina img {
+      width: 220px;
+      height: auto;
+    }
     .scroll-cue {
       position: absolute;
       bottom: 2.5rem;
@@ -156,21 +139,19 @@
       opacity: 0.35;
       animation: cue 2.2s ease-in-out infinite;
     }
-
     @keyframes cue {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50%       { transform: translateX(-50%) translateY(7px); }
     }
 
-    /* ── SECTION 2 — MISSION ──────────────────────────── */
+    /* ── SECTION 2 — MISSION ─────────────────────── */
     #mission {
       background: var(--navy);
       padding: 7rem 0;
+      min-height: auto;
     }
-
     #mission .eyebrow { color: var(--cream); }
     #mission .rule { background: var(--cream); }
-
     .mission-headline {
       font-size: 2.1rem;
       font-weight: 300;
@@ -179,76 +160,58 @@
       margin-bottom: 2.5rem;
       max-width: 680px;
     }
-
     .mission-body p {
       font-size: 0.92rem;
       font-weight: 300;
       line-height: 1.95;
       color: rgba(237,232,223,0.72);
       margin-bottom: 1.4rem;
-      max-width: 800px;
+      max-width: 820px;
     }
-
-    .sectors {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 3rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .sector-pill {
-      border: 1px solid rgba(237,232,223,0.18);
-      padding: 0.7rem 0.9rem;
-      text-align: center;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.65;
-      transition: opacity 0.2s, border-color 0.2s;
-    }
-
-    .sector-pill:hover {
-      opacity: 1;
-      border-color: rgba(237,232,223,0.45);
-    }
-
-    /* MINA Badge */
-    .mina-wrap {
-      display: flex;
-      justify-content: center;
+    .sectors-image {
       margin-top: 3.5rem;
+      width: 100%;
+      border-radius: 4px;
+      display: block;
     }
 
-    .mina-wrap img {
-      width: 280px;
-      height: auto;
-    }
-
-    /* ── SECTION 3 — ABOUT ────────────────────────────── */
+    /* ── SECTION 3 — TEAM ─────────────────────────── */
     #about {
       background: var(--cream);
       padding: 7rem 0;
+      min-height: auto;
     }
-
-    .about-headline {
+    .section-h2 {
       font-size: 2.1rem;
       font-weight: 300;
-      color: var(--navy);
-      margin-bottom: 4rem;
+      color: var(--cream);
+      margin-bottom: 3.5rem;
     }
-
+    .section-h2.dark {
+      color: var(--navy);
+      margin-bottom: 3.5rem;
+    }
     .team-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 3.5rem 4rem;
     }
-
-    .team-card { display: flex; flex-direction: column; gap: 1.4rem; }
-
-    .avatar {
+    .team-card { display: flex; flex-direction: column; gap: 1.2rem; }
+    .avatar-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--navy);
+    }
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .avatar-initials {
       width: 110px;
       height: 110px;
       border-radius: 50%;
@@ -256,186 +219,216 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--cream);
       letter-spacing: 0.04em;
       flex-shrink: 0;
     }
-
     .member-name {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: 0.03em;
       color: var(--navy);
     }
-
     .member-title {
-      font-size: 0.68rem;
+      font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--navy);
       opacity: 0.42;
-      margin-top: 0.3rem;
+      margin-top: 0.25rem;
     }
-
     .li-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      margin-top: 0.6rem;
-      padding: 0.55rem 1.15rem;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1.1rem;
       border: 1.5px solid var(--navy);
       text-decoration: none;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--navy);
       transition: background 0.2s, color 0.2s;
+      width: fit-content;
     }
+    .li-btn:hover { background: var(--navy); color: var(--cream); }
 
-    .li-btn:hover {
-      background: var(--navy);
-      color: var(--cream);
-    }
-
-    .li-btn svg { flex-shrink: 0; }
-
-    /* ── SECTION 4 — PORTFOLIO ────────────────────────── */
+    /* ── SECTION 4 — PORTFOLIO ───────────────────── */
     #portfolio {
       background: var(--navy);
       padding: 7rem 0;
+      min-height: auto;
     }
-
     #portfolio .eyebrow { color: var(--cream); }
     #portfolio .rule { background: var(--cream); }
-
-    .portfolio-headline {
-      font-size: 2.1rem;
-      font-weight: 300;
-      color: var(--cream);
-      margin-bottom: 3.5rem;
-    }
-
+    #portfolio .section-h2 { color: var(--cream); }
     .portfolio-card {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 2.5rem 3.5rem;
-      border: 1px solid rgba(237,232,223,0.18);
-      text-decoration: none;
-      transition: background 0.25s, border-color 0.25s;
-    }
-
-    .portfolio-card:hover {
-      background: rgba(237,232,223,0.05);
-      border-color: rgba(237,232,223,0.5);
-    }
-
-    .portfolio-name {
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cream);
-    }
-
-    .portfolio-sub {
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.35;
-    }
-
-    .portfolio-arrow {
-      margin-top: 1rem;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--cream);
-      opacity: 0.5;
+      border: 1px solid rgba(237,232,223,0.15);
+      padding: 3rem 3.5rem;
       display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 760px;
+    }
+    .np-logo {
+      height: 52px;
+      width: auto;
+      display: block;
+    }
+    .np-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(237,232,223,0.25);
+    }
+    .np-description {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: rgba(237,232,223,0.72);
+    }
+    .np-link {
+      display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      text-decoration: none;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.55;
+      transition: opacity 0.2s;
     }
+    .np-link:hover { opacity: 1; }
 
-    /* ── SECTION 5 — CONTACT ──────────────────────────── */
-    #contact {
+    /* ── SECTION 5 — CAREERS ─────────────────────── */
+    #careers {
       background: var(--cream);
       padding: 7rem 0;
+      min-height: auto;
     }
-
-    .contact-headline {
-      font-size: 2.1rem;
+    .careers-intro {
+      font-size: 1.35rem;
       font-weight: 300;
       color: var(--navy);
-      margin-bottom: 3.5rem;
+      line-height: 1.5;
+      margin-bottom: 3rem;
+      max-width: 680px;
+    }
+    .careers-lead {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(27,45,63,0.72);
+      margin-bottom: 1.2rem;
+      max-width: 800px;
+    }
+    .careers-lead strong {
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .careers-section-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-top: 3rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(27,45,63,0.12);
+    }
+    .careers-why {
+      background: var(--navy);
+      padding: 3rem 3.5rem;
+      margin-top: 3.5rem;
+      max-width: 800px;
+    }
+    .careers-why p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(237,232,223,0.72);
+      margin-bottom: 1.2rem;
+      max-width: 680px;
+    }
+    .careers-why p:last-child { margin-bottom: 0; }
+    .careers-why-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+      letter-spacing: 0.04em;
     }
 
+    /* ── SECTION 6 — CONTACT ─────────────────────── */
+    #contact {
+      background: var(--navy);
+      padding: 7rem 0;
+      min-height: auto;
+    }
+    #contact .eyebrow { color: var(--cream); }
+    #contact .rule { background: var(--cream); }
+    .contact-headline { font-size: 2.1rem; font-weight: 300; color: var(--cream); margin-bottom: 3rem; }
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 2.5rem;
     }
-
     .contact-item label {
       font-size: 0.62rem;
       font-weight: 800;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--navy);
+      color: var(--cream);
       opacity: 0.38;
       display: block;
       margin-bottom: 0.5rem;
     }
-
     .contact-item a {
       font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--navy);
+      font-weight: 400;
+      color: var(--cream);
       text-decoration: none;
-      border-bottom: 1px solid rgba(27,45,63,0.2);
+      border-bottom: 1px solid rgba(237,232,223,0.2);
       padding-bottom: 2px;
       transition: border-color 0.2s;
       display: inline-block;
     }
+    .contact-item a:hover { border-color: var(--cream); }
 
-    .contact-item a:hover { border-color: var(--navy); }
-
-    /* ── FOOTER ───────────────────────────────────────── */
+    /* ── FOOTER ───────────────────────────────────── */
     footer {
       background: var(--navy);
+      border-top: 1px solid rgba(237,232,223,0.08);
       padding: 1.8rem 4rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     footer .f-brand {
       font-size: 0.65rem;
       font-weight: 800;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(237,232,223,0.35);
+      color: rgba(237,232,223,0.3);
     }
-
     footer .f-copy {
       font-size: 0.62rem;
-      color: rgba(237,232,223,0.25);
+      color: rgba(237,232,223,0.2);
       letter-spacing: 0.06em;
     }
 
-    /* ── RESPONSIVE ───────────────────────────────────── */
+    /* ── RESPONSIVE ───────────────────────────────── */
     @media (max-width: 720px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
       .hero-wordmark h1 { font-size: 2.2rem; }
-      .sectors { grid-template-columns: 1fr 1fr; }
       .team-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .inner { padding: 0 1.5rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -444,22 +437,22 @@
 </head>
 <body>
 
-  <!-- ── NAVIGATION ───────────────────────────────── -->
+  <!-- ── NAVIGATION ─────────────────────────────── -->
   <nav>
     <span class="nav-brand">Waterview Partners</span>
     <ul class="nav-links">
       <li><a href="#mission">Mission</a></li>
-      <li><a href="#about">About</a></li>
+      <li><a href="#about">Team</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#careers">Careers</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- ── SECTION 1 — HERO ─────────────────────────── -->
+  <!-- ── SECTION 1 — HERO ───────────────────────── -->
   <section id="hero">
     <div class="hero-wrap">
-
-      <!-- Wave mark (SVG recreation of the Waterview wave icon) -->
+      <!-- Wave mark -->
       <svg class="logo-mark" viewBox="0 0 110 75" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M8 16 Q27 5 46 16 Q65 27 84 16 Q100 7 108 11" stroke="#1B2D3F" stroke-width="7" stroke-linecap="round" fill="none"/>
         <path d="M4 37 Q26 24 50 37 Q74 50 98 37 Q105 33 110 35" stroke="#1B2D3F" stroke-width="7" stroke-linecap="round" fill="none"/>
@@ -468,7 +461,13 @@
 
       <div class="hero-wordmark">
         <h1>Waterview</h1>
-        <p>Partners</p>
+        <p class="subtitle">Partners</p>
+        <p class="hero-slogan">Building the industries that build everything else</p>
+      </div>
+
+      <!-- MINA badge -->
+      <div class="hero-mina">
+        <img src="MINA.png" alt="Made in North America" />
       </div>
     </div>
 
@@ -480,7 +479,7 @@
     </div>
   </section>
 
-  <!-- ── SECTION 2 — MISSION ──────────────────────── -->
+  <!-- ── SECTION 2 — MISSION ────────────────────── -->
   <section id="mission">
     <div class="inner">
       <p class="eyebrow light">Mission &amp; Focus</p>
@@ -496,62 +495,75 @@
         <p>The firm is focused on sectors at the intersection of national security, technological sovereignty, and supply chain resilience. By aligning private capital with deep industrial and operational expertise, Waterview Partners seeks to strengthen North America's position as a globally competitive, secure, and sustainable manufacturing hub.</p>
       </div>
 
-      <div class="sectors">
-        <div class="sector-pill">Semiconductors</div>
-        <div class="sector-pill">Defense &amp; Autonomous Systems</div>
-        <div class="sector-pill">Robotics</div>
-        <div class="sector-pill">Space Technology</div>
-        <div class="sector-pill">Specialty Chemicals</div>
-        <div class="sector-pill">AI Infrastructure</div>
-      </div>
-
-      <!-- MINA Badge -->
-      <div class="mina-wrap">
-        <img src="MINA.png" alt="Made in North America" />
-      </div>
-
+      <!-- Sectors graphic — save your image as sectors.png in this folder -->
+      <img src="sectors.png" alt="Waterview Partners — Focus Sectors" class="sectors-image" onerror="this.style.display='none'" />
     </div>
   </section>
 
-  <!-- ── SECTION 3 — ABOUT ─────────────────────────── -->
+  <!-- ── SECTION 3 — TEAM ───────────────────────── -->
   <section id="about">
     <div class="inner">
-      <p class="eyebrow">About Us</p>
+      <p class="eyebrow">Team</p>
       <div class="rule"></div>
-
-      <h2 class="about-headline">Our team</h2>
+      <h2 class="section-h2 dark">Our team</h2>
 
       <div class="team-grid">
 
         <!-- Marcelo -->
         <div class="team-card">
-          <div class="avatar">MA</div>
+          <div class="avatar-wrap">
+            <img src="photo-marcelo.jpg" alt="Marcelo de Antuñano" />
+          </div>
           <div>
             <p class="member-name">Marcelo de Antuñano</p>
             <p class="member-title">CEO &amp; Co-Founder</p>
           </div>
           <a class="li-btn" href="https://www.linkedin.com/in/marcelo-de-antu%C3%B1ano-59646725/" target="_blank" rel="noopener noreferrer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-            LinkedIn Profile
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
           </a>
         </div>
 
-        <!-- Genaro -->
+        <!-- Genaro — no photo -->
         <div class="team-card">
-          <div class="avatar">GM</div>
+          <div class="avatar-initials">GM</div>
           <div>
             <p class="member-name">Genaro Marquez</p>
             <p class="member-title">CFO &amp; Co-Founder</p>
           </div>
           <a class="li-btn" href="https://www.linkedin.com/in/genaromarquez/" target="_blank" rel="noopener noreferrer">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-            LinkedIn Profile
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <!-- Greg Jones -->
+        <div class="team-card">
+          <div class="avatar-wrap">
+            <img src="photo-greg.jpg" alt="Greg Jones" />
+          </div>
+          <div>
+            <p class="member-name">Greg Jones</p>
+            <p class="member-title">Operating Partner – Specialty Chemicals</p>
+          </div>
+          <a class="li-btn" href="https://www.linkedin.com/in/whoisgregjones/" target="_blank" rel="noopener noreferrer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <!-- Caitlin Pincus -->
+        <div class="team-card">
+          <div class="avatar-wrap">
+            <img src="photo-caitlin.jpg" alt="Caitlin Pincus" />
+          </div>
+          <div>
+            <p class="member-name">Caitlin Pincus</p>
+            <p class="member-title">Operating Partner – Venture Capital &amp; Private Equity</p>
+          </div>
+          <a class="li-btn" href="https://www.linkedin.com/in/caitlin-pincus-123a7/" target="_blank" rel="noopener noreferrer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
           </a>
         </div>
 
@@ -559,36 +571,85 @@
     </div>
   </section>
 
-  <!-- ── SECTION 4 — PORTFOLIO ─────────────────────── -->
+  <!-- ── SECTION 4 — PORTFOLIO ──────────────────── -->
   <section id="portfolio">
     <div class="inner">
       <p class="eyebrow light">Affiliates &amp; Portfolio</p>
       <div class="rule"></div>
+      <h2 class="section-h2">Portfolio companies</h2>
 
-      <h2 class="portfolio-headline">Portfolio companies</h2>
-
-      <a class="portfolio-card" href="https://www.nanopulse.co/" target="_blank" rel="noopener noreferrer">
-        <span class="portfolio-name">NanoPulse</span>
-        <span class="portfolio-sub">Portfolio Company</span>
-        <span class="portfolio-arrow">
+      <div class="portfolio-card">
+        <a href="https://www.nanopulse.co/" target="_blank" rel="noopener noreferrer">
+          <img src="nanopulse-logo.png" alt="NanoPulse" class="np-logo" />
+        </a>
+        <div class="np-divider"></div>
+        <p class="np-description">NanoPulse is a U.S. semiconductor company with operations in Mexicali, Baja California. We are building North America's first independent outsourced semiconductor assembly and test (OSAT) platform. Our mission is to help address the global shortage of advanced semiconductor packaging capacity through a secure, scalable, and cost-competitive manufacturing solution. We support customers across AI, high-performance computing, communications, automotive, defense, and other advanced technology markets.</p>
+        <a class="np-link" href="https://www.nanopulse.co/" target="_blank" rel="noopener noreferrer">
           Visit nanopulse.co
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </span>
-      </a>
-
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- ── SECTION 5 — CONTACT ───────────────────────── -->
-  <section id="contact">
+  <!-- ── SECTION 5 — CAREERS ────────────────────── -->
+  <section id="careers">
     <div class="inner">
-      <p class="eyebrow">Contact</p>
+      <p class="eyebrow">Careers</p>
       <div class="rule"></div>
 
-      <h2 class="contact-headline">Get in touch</h2>
+      <p class="careers-intro">You Know Who You Are</p>
 
+      <p class="careers-lead">Exceptional people rarely need to be told they are exceptional.</p>
+      <p class="careers-lead">They have spent years earning trust, developing expertise, and consistently delivering results in environments where expectations are high, standards are uncompromising, and sustained excellence is the baseline.</p>
+      <p class="careers-lead">If that describes you, and you are ready to help build category-defining companies in industries that matter, we encourage you to reach out to the founders directly.</p>
+      <p class="careers-lead">Waterview Partners builds companies in Space Technology, Semiconductors, Artificial Intelligence, Robotics, Advanced Manufacturing, Defense &amp; Autonomous Systems, Specialty Chemicals, and Advanced Materials.</p>
+      <p class="careers-lead">These are not incremental industries.</p>
+      <p class="careers-lead">They are the strategic industries North America allowed to migrate elsewhere. Industries it is only now beginning to rebuild, driven by supply chain resilience, cost competitiveness, and national security imperatives.</p>
+      <p class="careers-lead">We are looking for two types of people.</p>
+
+      <div class="careers-section-title">(I) Industry Subject Matter Experts</div>
+
+      <p class="careers-lead">Space Technology. Semiconductors. Artificial Intelligence. Robotics. Advanced Manufacturing. Defense &amp; Autonomous Systems. Specialty Chemicals. Advanced Materials.</p>
+      <p class="careers-lead">You have 15 or more years of deep operating experience in one of these sectors. People in your industry take your calls.</p>
+      <p class="careers-lead">You have built products, led organizations, run operations, commercialized technologies, developed markets, or closed transformative transactions. You have technical credibility, commercial judgment, and relationships that cannot be replicated.</p>
+      <p class="careers-lead">You understand your industry inside and out. Not from advising it. From building within it. You have lived it. You carry the judgment, the scars, the credibility, and the network that only years inside an industry can create.</p>
+      <p class="careers-lead">You bring technical depth and business development capability in equal measure. You know the customers, suppliers, partners, regulators, and decision-makers who shape your sector.</p>
+      <p class="careers-lead"><strong>Critical:</strong> You are comfortable operating in high-performance environments alongside professionals from private equity, venture capital, investment banking, Big Law, and management consulting. You understand the responsiveness, urgency, accountability, and standards of excellence these environments demand. You are proactive, highly responsive, and execution-oriented. You anticipate issues before they arise, communicate clearly, and consistently move initiatives from discussion to completion.</p>
+      <p class="careers-lead">You do not wait to be told what to do. You identify opportunities, solve problems, and drive outcomes.</p>
+      <p class="careers-lead">Most importantly, you are ready to apply your expertise to building something of your own.</p>
+
+      <div class="careers-section-title">(II) Investment &amp; Transaction Professionals</div>
+
+      <p class="careers-lead">You have spent 10 or more years at an elite institution. Private equity, venture capital, investment banking, Big Law, management consulting or a similarly rigorous environment.</p>
+      <p class="careers-lead">You have already received the training. You do not need handholding.</p>
+      <p class="careers-lead">You can walk into a complex situation, quickly identify what matters, exercise sound judgment, and execute with limited supervision. You are comfortable operating in ambiguity, managing multiple workstreams simultaneously, and solving problems that have no predefined answers.</p>
+      <p class="careers-lead">You can review a two-page memorandum, surface the critical issues in minutes, and drive toward resolution. You are comfortable coordinating investment bankers, government officials, accountants, consultants, and legal counsel across jurisdictions, managing complex transactions and negotiating against world-class counterparties.</p>
+      <p class="careers-lead">Your written communication and email etiquette is impeccable. Your judgment is sound. Your follow-through is total.</p>
+      <p class="careers-lead">You are commercially minded, intellectually honest, highly responsive, and relentlessly accountable. You build trust with founders, executives, investors, government officials, lenders, and industry leaders. You know how to align stakeholders and get things done.</p>
+      <p class="careers-lead">You bring energy to the team, not drama. You leave your ego at the door, focus on the objective, and execute at a consistently high level.</p>
+      <p class="careers-lead">Experience in New York, Los Angeles, Silicon Valley, London, or similarly demanding markets is strongly preferred.</p>
+
+      <div class="careers-why">
+        <p class="careers-why-title">Why Waterview Partners</p>
+        <p>At some point, many exceptional people stop finding large institutions fulfilling.</p>
+        <p>The compensation is attractive. The title is prestigious. The platform is world-class. But you already know you can do more. You just need the right vehicle.</p>
+        <p>If you are looking for another corporate ladder to climb, we are not the right fit.</p>
+        <p>We are looking for proven professionals who can sit across the table from CEOs, investors, founders, government officials, lenders, and industry leaders and immediately add value.</p>
+        <p>People who can build.</p>
+        <p>We move quickly. We expect excellence. We value judgment, accountability, intellectual curiosity, resilience, and a founder's mentality.</p>
+        <p>This is not for everyone.</p>
+        <p>But if you have spent the last decade proving yourself inside the world's best institutions and you are ready to build category-defining companies from the ground up, we would like to hear from you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 6 — CONTACT ────────────────────── -->
+  <section id="contact">
+    <div class="inner">
+      <p class="eyebrow light">Contact</p>
+      <div class="rule"></div>
+      <h2 class="contact-headline">Get in touch</h2>
       <div class="contact-grid">
         <div class="contact-item">
           <label>Marcelo de Antuñano — CEO &amp; Co-Founder</label>
@@ -599,14 +660,13 @@
           <a href="mailto:genaro@waterviewpartners.co">genaro@waterviewpartners.co</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────── -->
+  <!-- ── FOOTER ──────────────────────────────────── -->
   <footer>
     <span class="f-brand">Waterview Partners</span>
-    <span class="f-copy">&copy; 2025 Waterview Partners. All rights reserved.</span>
+    <span class="f-copy">&copy; 2026 Waterview Partners. All rights reserved.</span>
   </footer>
 
 </body>
